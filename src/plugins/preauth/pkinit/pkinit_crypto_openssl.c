@@ -3754,11 +3754,13 @@ pkinit_find_private_key(krb5_context context,
 #ifdef PKINIT_USE_KEY_USAGE
     CK_BBOOL true_false;
 #endif
+
     cls = CKO_PRIVATE_KEY;
     attrs[nattrs].type = CKA_CLASS;
     attrs[nattrs].pValue = &cls;
     attrs[nattrs].ulValueLen = sizeof cls;
     nattrs++;
+
 #ifdef PKINIT_USE_KEY_USAGE
     /*
      * Some cards get confused if you try to specify a key usage,
