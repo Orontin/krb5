@@ -2284,8 +2284,6 @@ cms_signeddata_verify(krb5_context context,
             goto cleanup;
         out = BIO_new(BIO_s_mem());
         if (CMS_verify(cms, NULL, store, NULL, out, flags) == 0) {
-            //?
-            //?
             if (ERR_peek_last_error() == CMS_R_VERIFICATION_FAILURE)
                 retval = KRB5KDC_ERR_INVALID_SIG;
             else
@@ -3756,13 +3754,11 @@ pkinit_find_private_key(krb5_context context,
 #ifdef PKINIT_USE_KEY_USAGE
     CK_BBOOL true_false;
 #endif
-//?
     cls = CKO_PRIVATE_KEY;
     attrs[nattrs].type = CKA_CLASS;
     attrs[nattrs].pValue = &cls;
     attrs[nattrs].ulValueLen = sizeof cls;
     nattrs++;
-//?
 #ifdef PKINIT_USE_KEY_USAGE
     /*
      * Some cards get confused if you try to specify a key usage,
@@ -3938,11 +3934,10 @@ pkinit_sign_data_pkcs11(krb5_context context,
 {
     krb5_error_code ret;
     CK_OBJECT_HANDLE obj;
-    CK_ULONG len = 0;
+    CK_ULONG len;
     CK_MECHANISM mech;
     CK_SESSION_HANDLE session;
     CK_FUNCTION_LIST_PTR p11;
-    //?
     CK_ATTRIBUTE attr;
     CK_KEY_TYPE keytype;
     CK_RV rv;
