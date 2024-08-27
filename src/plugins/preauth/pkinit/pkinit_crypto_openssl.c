@@ -4001,8 +4001,8 @@ pkinit_sign_data_pkcs11(krb5_context context,
         input_len = mdlen;
     } else if (keytype == CKK_GOSTR3410) {
         mech.mechanism = get_mech_type(id_cryptoctx);
-        input = mdbuf;
-        input_len = mdlen;
+        input = data;
+        input_len = data_len;
     } else {
         ret = KRB5KDC_ERR_PREAUTH_FAILED;
         k5_setmsg(context, ret,
