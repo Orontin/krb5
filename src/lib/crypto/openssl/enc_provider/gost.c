@@ -1,5 +1,5 @@
 #include "crypto_int.h"
-#include "gost_helper.h"
+#include "../gost_helper.h"
 #include <openssl/evp.h>
 
 #define BLOCK_SIZE 8

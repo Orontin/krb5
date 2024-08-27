@@ -1743,7 +1743,7 @@ pkey_to_digest_nid(const EVP_PKEY* const pkey)
     case NID_id_GostR3410_2001:
         return NID_id_GostR3411_94;
     default:
-        return NID_sha1;
+        return NID_sha256;
     }
 }
 
@@ -1758,7 +1758,7 @@ get_digest_nid(const pkinit_identity_crypto_context idcryptctx)
     case NID_id_GostR3410_2001:
         return NID_id_GostR3411_94;
     default:
-        return NID_sha1;
+        return NID_sha256;
     }
 }
 
@@ -1773,7 +1773,7 @@ get_alg_nid(const pkinit_identity_crypto_context idcryptctx)
     case NID_id_GostR3410_2001:
         return NID_id_tc26_signwithdigest;
     default:
-        return NID_sha1WithRSAEncryption;
+        return NID_sha256WithRSAEncryption;
     }
 }
 

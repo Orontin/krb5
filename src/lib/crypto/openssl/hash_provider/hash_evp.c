@@ -31,7 +31,7 @@
  */
 
 #include "crypto_int.h"
-#include "gost_helper.h"
+#include "../gost_helper.h"
 
 #if defined(K5_OPENSSL_MD4) || defined(K5_OPENSSL_MD5) ||       \
     defined(K5_OPENSSL_SHA1) || defined(K5_OPENSSL_SHA2)
