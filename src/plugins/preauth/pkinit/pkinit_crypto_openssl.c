@@ -3999,6 +3999,10 @@ pkinit_sign_data_pkcs11(krb5_context context,
         mech.mechanism = CKM_ECDSA;
         input = mdbuf;
         input_len = mdlen;
+    } else if (keytype == CKK_GOSTR3410) {
+        mech.mechanism = CKM_GOSTR3410;
+        input = mdbuf;
+        input_len = mdlen;
     } else {
         ret = KRB5KDC_ERR_PREAUTH_FAILED;
         k5_setmsg(context, ret,
