@@ -69,6 +69,7 @@ const struct krb5_keytypes krb5int_enctypes_list[] = {
       k5_rand2key_direct, krb5int_arcfour_prf,
       CKSUMTYPE_HMAC_MD5_ARCFOUR,
       ETYPE_DEPRECATED, 64 },
+
     { ENCTYPE_ARCFOUR_HMAC_EXP,
       "arcfour-hmac-exp", { "rc4-hmac-exp", "arcfour-hmac-md5-exp" },
       "Exportable ArcFour with HMAC/md5",
@@ -92,6 +93,7 @@ const struct krb5_keytypes krb5int_enctypes_list[] = {
       krb5int_dk_prf,
       CKSUMTYPE_HMAC_SHA1_96_AES128,
       0 /*flags*/, 128 },
+
     { ENCTYPE_AES256_CTS_HMAC_SHA1_96,
       "aes256-cts-hmac-sha1-96", { "aes256-cts", "aes256-sha1" },
       "AES-256 CTS mode with 96-bit SHA-1 HMAC",
@@ -114,6 +116,7 @@ const struct krb5_keytypes krb5int_enctypes_list[] = {
       krb5int_dk_cmac_prf,
       CKSUMTYPE_CMAC_CAMELLIA128,
       0 /*flags*/, 128 },
+
     { ENCTYPE_CAMELLIA256_CTS_CMAC,
       "camellia256-cts-cmac", { "camellia256-cts" },
       "Camellia-256 CTS mode with CMAC",
@@ -136,6 +139,7 @@ const struct krb5_keytypes krb5int_enctypes_list[] = {
       krb5int_aes2_prf,
       CKSUMTYPE_HMAC_SHA256_128_AES128,
       0 /*flags*/, 128 },
+
     { ENCTYPE_AES256_CTS_HMAC_SHA384_192,
       "aes256-cts-hmac-sha384-192", { "aes256-sha2" },
       "AES-256 CTS mode with 192-bit SHA-384 HMAC",
@@ -146,6 +150,50 @@ const struct krb5_keytypes krb5int_enctypes_list[] = {
       krb5int_aes2_prf,
       CKSUMTYPE_HMAC_SHA384_192_AES256,
       0 /*flags*/, 256 },
+
+    { ENCTYPE_AES256_CTS_STRIBOG_256,
+      "aes256-cts-stribog-256", { "aes256-stribog256" },
+      "AES-256 CTS mode with 256-bit stribog",
+      &krb5int_enc_aes256, &krb5int_hash_stribog256,
+      16,
+      krb5int_aes2_crypto_length, krb5int_etm_encrypt, krb5int_etm_decrypt,
+      krb5int_aes2_string_to_key, k5_rand2key_direct,
+      krb5int_aes2_prf,
+      CKSUMTYPE_STRIBOG_256_AES256,
+      0 /*flags*/, 256 },
+
+    { ENCTYPE_AES256_CTS_STRIBOG_512,
+      "aes256-cts-stribog-512", { "aes256-stribog512" },
+      "AES-256 CTS mode with 512-bit stribog",
+      &krb5int_enc_aes256, &krb5int_hash_stribog512,
+      16,
+      krb5int_aes2_crypto_length, krb5int_etm_encrypt, krb5int_etm_decrypt,
+      krb5int_aes2_string_to_key, k5_rand2key_direct,
+      krb5int_aes2_prf,
+      CKSUMTYPE_STRIBOG_512_AES256,
+      0 /*flags*/, 256 },
+
+    { ENCTYPE_GOST89_CBC_STRIBOG_256,
+      "gost89-cbc-stribog-256", { "gost89-stribog256" },
+      "GOST 28147-89 CBC mode with 256-bit stribog",
+      &krb5int_enc_gost89, &krb5int_hash_stribog256,
+      16,
+      krb5int_dk_crypto_length, krb5int_dk_encrypt, krb5int_dk_decrypt,
+      krb5int_dk_string_to_key, k5_rand2key_direct,
+      krb5int_dk_prf,
+      CKSUMTYPE_STRIBOG_256_GOST89,
+      0 /*flags*/, 256 },
+
+    { ENCTYPE_GOST89_CBC_STRIBOG_512,
+     "gost89-cbc-stribog-512", { "gost89-stribog512" },
+     "GOST 28147-89 CBC mode with 512-bit stribog",
+     &krb5int_enc_gost89, &krb5int_hash_stribog512,
+     16,
+     krb5int_dk_crypto_length, krb5int_dk_encrypt, krb5int_dk_decrypt,
+     krb5int_dk_string_to_key, k5_rand2key_direct,
+     krb5int_dk_prf,
+     CKSUMTYPE_STRIBOG_512_GOST89,
+     0 /*flags*/, 256 },
 };
 
 const int krb5int_enctypes_length =
