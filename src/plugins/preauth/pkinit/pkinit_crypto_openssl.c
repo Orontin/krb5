@@ -3982,7 +3982,7 @@ pkinit_sign_data_pkcs11(krb5_context context,
         ret = KRB5KDC_ERR_PREAUTH_FAILED;
         goto cleanup;
     }
-    EVP_DigestInit_ex(ctx, EVP_sha256(), NULL);
+    EVP_DigestInit_ex(ctx, EVP_get_digestbynid(get_digest_nid(id_cryptoctx)), NULL);
     EVP_DigestUpdate(ctx, data, data_len);
     EVP_DigestFinal_ex(ctx, mdbuf, &mdlen);
     EVP_MD_CTX_free(ctx);
@@ -4000,7 +4000,7 @@ pkinit_sign_data_pkcs11(krb5_context context,
         input = mdbuf;
         input_len = mdlen;
     } else if (keytype == CKK_GOSTR3410) {
-        mech.mechanism = CKM_GOSTR3410;
+        mech.mechanism = get_mech_type(id_cryptoctx);
         input = mdbuf;
         input_len = mdlen;
     } else {
@@ -4087,6 +4087,10 @@ create_signature(unsigned char **sig, unsigned int *sig_len,
 {
     krb5_error_code retval = ENOMEM;
     EVP_MD_CTX *ctx;
+    int type;
+
+    type = EVP_PKEY_base_id(pkey);
+    type = EVP_PKEY_id(pkey);
 
     if (pkey == NULL)
         return retval;
@@ -4094,7 +4098,7 @@ create_signature(unsigned char **sig, unsigned int *sig_len,
     ctx = EVP_MD_CTX_new();
     if (ctx == NULL)
         return ENOMEM;
-    EVP_SignInit(ctx, EVP_sha256());
+    EVP_SignInit(ctx, EVP_get_digestbynid(pkey_to_digest_nid(pkey)));
     EVP_SignUpdate(ctx, data, data_len);
     *sig_len = EVP_PKEY_size(pkey);
     if ((*sig = malloc(*sig_len)) == NULL)

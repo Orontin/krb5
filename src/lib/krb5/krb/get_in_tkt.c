@@ -1087,23 +1087,24 @@ init_creds_validate_reply(krb5_context context,
     krb5_free_kdc_rep(context, ctx->reply);
     ctx->reply = NULL;
 
-    if (krb5_is_krb_error(reply)) {
-        code = decode_krb5_error(reply, &error);
-        if (code != 0)
-            return code;
+//    if (krb5_is_krb_error(reply)) {
+//        code = decode_krb5_error(reply, &error);
+//        if (code != 0)
+//            return code;
 
-        assert(error != NULL);
+//        assert(error != NULL);
 
-        TRACE_INIT_CREDS_ERROR_REPLY(context,
-                                     error->error + ERROR_TABLE_BASE_krb5);
-        if (error->error == KRB_ERR_RESPONSE_TOO_BIG) {
-            krb5_free_error(context, error);
-            return KRB5KRB_ERR_RESPONSE_TOO_BIG;
-        } else {
-            ctx->err_reply = error;
-            return 0;
-        }
-    }
+//        TRACE_INIT_CREDS_ERROR_REPLY(context,
+//                                     error->error + ERROR_TABLE_BASE_krb5);
+//        if (error->error == KRB_ERR_RESPONSE_TOO_BIG) {
+//            krb5_free_error(context, error);
+//            return KRB5KRB_ERR_RESPONSE_TOO_BIG;
+//        } else {
+//            ctx->err_reply = error;
+//            return 0;
+//        }
+//    }
+    return 0;
 
     /*
      * Check to make sure it isn't a V4 reply.
